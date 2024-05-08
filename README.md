@@ -37,6 +37,7 @@ coding!
 - Stanislav #1: [GitHub](https://github.com/KoatKoetl) / [LinkedIn](https://www.linkedin.com/in/stanislav-suschevici-a4617228a/)
 - Dominic #2: [GitHub](https://github.com/SirDominique) / [LinkedIn](https://www.linkedin.com/in/dominic-quansah-psm-i-psm-ii-4a2174101/)
 - Victoria #3: [GitHub](https://github.com/VriaA) / [LinkedIn](https://www.linkedin.com/in/victoriaoyelola/)
+- Nicola #4: [Github](https://github.com/NicolaHearn) / [LinkedIn](https://www.linkedin.com/in/nicola-hearn-07449720/)
 
    ...
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
