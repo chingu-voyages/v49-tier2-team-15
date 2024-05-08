@@ -35,7 +35,7 @@ your repo access and to practice PR'ing with your team *before* you start
 coding!
 
 - Stanislav #1: [GitHub](https://github.com/KoatKoetl) / [LinkedIn](https://www.linkedin.com/in/stanislav-suschevici-a4617228a/)
-- Teammate name #2: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Dominic #2: [GitHub](https://github.com/SirDominique) / [LinkedIn](https://www.linkedin.com/in/dominic-quansah-psm-i-psm-ii-4a2174101/)
 
    ...
 - Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
