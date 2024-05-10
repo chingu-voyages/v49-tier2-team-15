@@ -39,6 +39,7 @@ coding!
 - Victoria #3: [GitHub](https://github.com/VriaA) / [LinkedIn](https://www.linkedin.com/in/victoriaoyelola/)
 - Nicola #4: [Github](https://github.com/NicolaHearn) / [LinkedIn](https://www.linkedin.com/in/nicola-hearn-07449720/)
 - Fouad #5: [GitHub](https://github.com/fmtabbara)
+- Felipe #6: [Github](https://github.com/feliperdamaceno) / [LinkedIn](https://www.linkedin.com/in/feliperdamaceno)
 
   ...
 
