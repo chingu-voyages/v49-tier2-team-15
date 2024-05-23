@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        'water-brush': '"Water Brush", cursive'
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
