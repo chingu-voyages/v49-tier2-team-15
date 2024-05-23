@@ -1,6 +1,6 @@
 import { Button } from './ui/button';
 
-const InfoSection = () => {
+export default function InfoSection() {
   return (
     <div className="text-center p-5 flex flex-col justify-center items-center">
       <p className="my-6 max-w-7xl">
@@ -24,6 +24,4 @@ const InfoSection = () => {
       <Button>Get me some colours</Button>
     </div>
   );
-};
-
-export default InfoSection;
+}
