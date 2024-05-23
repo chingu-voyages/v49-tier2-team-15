@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# Color Inspo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- [Overview](#overview)
+- [Environment Variables Setup](#environment-variables-setup)
+- [How to get OpenAI Api Key](#how-to-get-openai-api-key)
+- [Our Team](#our-team)
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Project description here (TBD)
 
-## Expanding the ESLint configuration
+### Environment Variables Setup:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Create a .env file with a variable called `VITE_OPENAI_API_KEY`, following the example below:
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+VITE_OPENAI_API_KEY=6c793695171e793d7d0080ad7700
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### How to get OpenAI Api Key:
+
+Go to [OpenAI API website](https://platform.openai.com) and login with your account, then navigate to [/api-keys](https://platform.openai.com/api-keys) to generate your Personal Api Key.
+
+Useful Guide:
+[Managing your work in the API platform with Projects](https://help.openai.com/en/articles/9186755-managing-your-work-in-the-api-platform-with-projects)
+
+**Note**: You _do_ have to add credits in OpenAI to use their API, but $5,00 should last a few months, and it should be more than enough for this project pourpose, as we're not going to deploy our API keys.
+
+## Our Team
+
+- Stanislav: [GitHub](https://github.com/KoatKoetl) / [LinkedIn](https://www.linkedin.com/in/stanislav-suschevici-a4617228a/)
+- Dominic: [GitHub](https://github.com/SirDominique) / [LinkedIn](https://www.linkedin.com/in/dominic-quansah-psm-i-psm-ii-4a2174101/)
+- Victoria: [GitHub](https://github.com/VriaA) / [LinkedIn](https://www.linkedin.com/in/victoriaoyelola/)
+- Nicola: [Github](https://github.com/NicolaHearn) / [LinkedIn](https://www.linkedin.com/in/nicola-hearn-07449720/)
+- Felipe: [Github](https://github.com/feliperdamaceno) / [LinkedIn](https://www.linkedin.com/in/feliperdamaceno)
