@@ -26,7 +26,7 @@ export default function App() {
   }
 
   return (
-    <main className="p-20 space-y-8">
+    <>
       <h1 className="text-2xl">Color App</h1>
 
       <h2 className="text-xl">Prompt</h2>
@@ -51,6 +51,6 @@ export default function App() {
       {error ? <div className="text-red-500">{error?.message}</div> : null}
 
       <Button onClick={handleClick}>Generate</Button>
-    </main>
+    </>
   );
 }

@@ -6,7 +6,9 @@ const Root = () => {
   return (
     <div className="container">
       <Header />
-      <Outlet />
+      <main className="p-20 space-y-8">
+        <Outlet />
+      </main>
     </div>
   );
 };

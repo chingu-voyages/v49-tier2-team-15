@@ -1,6 +1,7 @@
 import { RouteObject } from 'react-router-dom';
 
 import Root from './Root';
+import App from '@/App';
 import ErrorPage from '@/error-page';
 
 const routes: RouteObject[] = [
@@ -11,7 +12,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <div>Home page</div>,
+        element: <App />,
       },
       {
         path: '/about',

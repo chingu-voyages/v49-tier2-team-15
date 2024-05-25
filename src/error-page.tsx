@@ -17,13 +17,15 @@ export default function ErrorPage() {
   const navigate = useNavigate();
 
   return (
-    <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{errorText.name || errorText.message}</i>
-      </p>
-      <Button onClick={() => navigate('/')}>Take me home!</Button>
-    </div>
+    <main className="p-20 space-y-8">
+      <div id="error-page">
+        <h1>Oops!</h1>
+        <p>Sorry, an unexpected error has occurred.</p>
+        <p>
+          <i>{errorText.name || errorText.message}</i>
+        </p>
+        <Button onClick={() => navigate('/')}>Take me home!</Button>
+      </div>
+    </main>
   );
 }
