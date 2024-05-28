@@ -4,8 +4,21 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from '@/components/ui/select';
 
 const errorMessage = 'Please use only one word, no spaces.';
+const predefinedKeywords = [
+  'Bright',
+  'Dark',
+  'Highlighted',
+  'Realistic',
+  'Fresh',
+];
 
 export default function UserGuidedForm() {
   const [purpose, setPurpose] = useState<string>('');
@@ -18,6 +31,7 @@ export default function UserGuidedForm() {
   const [audienceError, setAudienceError] = useState<boolean>(false);
 
   const [keywords, setKeywords] = useState<string>('');
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [keywordsError, setKeywordsError] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,21 +40,19 @@ export default function UserGuidedForm() {
     switch (id) {
       case 'purpose':
         setPurpose(value);
-        countOneWord(event) ? setPurposeError(false) : setPurposeError(true);
+        setPurposeError(!countOneWord(event));
         break;
       case 'audience':
         setAudience(value);
-        countChars(event) ? setAudienceError(false) : setAudienceError(true);
+        setAudienceError(!countChars(event));
         break;
       case 'mood':
         setMood(value);
-        countOneWord(event) ? setMoodError(false) : setMoodError(true);
+        setMoodError(!countOneWord(event));
         break;
       case 'keywords':
         setKeywords(value);
-        countFiveWords(event)
-          ? setKeywordsError(false)
-          : setKeywordsError(true);
+        setKeywordsError(!countFiveWords(event));
         break;
       default:
         break;
@@ -59,6 +71,32 @@ export default function UserGuidedForm() {
     return event.target.value.length <= 255;
   };
 
+  const handleSelectChange = (value: string) => {
+    if (!selectedKeywords.includes(value) && selectedKeywords.length < 5) {
+      setSelectedKeywords([...selectedKeywords, value]);
+    }
+  };
+
+  const handleAddCustomKeyword = () => {
+    if (
+      keywords &&
+      !selectedKeywords.includes(keywords) &&
+      selectedKeywords.length < 5
+    ) {
+      setSelectedKeywords([...selectedKeywords, keywords]);
+      setKeywords('');
+    } else if (selectedKeywords.length >= 5) {
+      setKeywordsError(true);
+    } else {
+      setKeywordsError(false);
+    }
+  };
+
+  const handleDeleteKeyword = (keyword: string) => {
+    setSelectedKeywords(selectedKeywords.filter((word) => word !== keyword));
+    setKeywordsError(false);
+  };
+
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -74,6 +112,12 @@ export default function UserGuidedForm() {
     }
 
     //! Handle the submit, because all errors are false
+    // Should send to the API:
+    // While Don't have errors and the fields are not empty
+    // 1: the purpose
+    // 2: the mood
+    // 3: the audience
+    // 4: the keywords
   };
 
   return (
@@ -134,16 +178,50 @@ export default function UserGuidedForm() {
                 <Label htmlFor="keywords">
                   Please also use these keywords...
                 </Label>
-                <Input
-                  id="keywords"
-                  placeholder="Additional keywords (max: 5)"
-                  autoComplete="off"
-                  value={keywords}
-                  onChange={handleChange}
-                />
+                <div className="flex gap-1">
+                  <Input
+                    id="keywords"
+                    placeholder="Add custom keywords..."
+                    autoComplete="off"
+                    value={keywords}
+                    onChange={handleChange}
+                  />
+                  <Select onValueChange={handleSelectChange}>
+                    <SelectTrigger className="w-12" />
+                    <SelectContent>
+                      {predefinedKeywords.map((keyword, index) => (
+                        <SelectItem key={index} value={keyword}>
+                          {keyword}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Button type="button" onClick={handleAddCustomKeyword}>
+                    Add
+                  </Button>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2 text-sm">
+                  {selectedKeywords.map((keyword, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center bg-gray-200 px-2 py-1 rounded"
+                    >
+                      <span key={index} className="bg-gray-200 px-2 rounded">
+                        {keyword}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteKeyword(keyword)}
+                        className="px-2"
+                      >
+                        X
+                      </button>
+                    </div>
+                  ))}
+                </div>
                 <span className="text-red-700 p-0 text-sm min-h-5">
                   {keywordsError &&
-                    'Maximum length exceeded. Only 5 keywords are allowed'}
+                    'Maximum number of keywords exceeded. Only 5 keywords are allowed.'}
                 </span>
               </div>
             </div>
