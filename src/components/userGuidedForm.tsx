@@ -15,6 +15,7 @@ export default function UserGuidedForm() {
   const [moodError, setMoodError] = useState<boolean>(false);
 
   const [audience, setAudience] = useState<string>('');
+  const [audienceError, setAudienceError] = useState<boolean>(false);
 
   const [keywords, setKeywords] = useState<string>('');
   const [keywordsError, setKeywordsError] = useState<boolean>(false);
@@ -29,6 +30,7 @@ export default function UserGuidedForm() {
         break;
       case 'audience':
         setAudience(value);
+        countChars(event) ? setAudienceError(false) : setAudienceError(true);
         break;
       case 'mood':
         setMood(value);
@@ -53,14 +55,37 @@ export default function UserGuidedForm() {
     return event.target.value.split(' ').length <= 5;
   };
 
+  const countChars = (event: React.ChangeEvent<HTMLInputElement>) => {
+    return event.target.value.length <= 255;
+  };
+
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const allErrors = {
+      purpose: purposeError,
+      mood: moodError,
+      audience: audienceError,
+      keywords: keywordsError,
+    };
+
+    if (Object.values(allErrors).includes(true)) {
+      return;
+    }
+
+    //! Handle the submit, because all errors are false
+  };
+
   return (
     <div className="flex justify-center items-center">
       <Card className="w-[640px]">
-        <CardHeader>
-          <CardTitle>Get help if you don't know where to start:</CardTitle>
+        <CardHeader className="hidden md:block">
+          <CardTitle className="text-3xl">
+            Or get help here if you don’t know where to start...
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <form>
+        <CardContent className="p-6">
+          <form onSubmit={submitForm}>
             <div className="grid md:grid-cols-2 gap-x-4 gap-y-2">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="purpose">I need my color scheme for...</Label>
@@ -86,7 +111,9 @@ export default function UserGuidedForm() {
                   value={audience}
                   onChange={handleChange}
                 />
-                <span className="text-red-700 p-0 text-sm min-h-5"></span>
+                <span className="text-red-700 p-0 text-sm min-h-5">
+                  {audienceError && 'Too many characters (Max: 255)'}
+                </span>
               </div>
 
               <div className="flex flex-col space-y-1.5">
@@ -121,8 +148,8 @@ export default function UserGuidedForm() {
               </div>
             </div>
 
-            <div className="pt-4 flex justify-center items-center">
-              <Button type="submit" className="md:px-24 py-6">
+            <div className="pt-4 flex justify-center md:justify-end items-center">
+              <Button type="submit" className="md:px-24 px-16 py-6">
                 See my colour palette
               </Button>
             </div>
