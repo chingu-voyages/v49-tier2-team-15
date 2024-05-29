@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useColorGenerator } from '../hooks';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -10,17 +12,37 @@ import {
   SelectItem,
   SelectTrigger,
 } from '@/components/ui/select';
+import { createGuidedColorPrompt } from '@/helpers/generators';
 
-const errorMessage = 'Please use only one word, no spaces.';
+interface userGuidedFormProps {
+  initialColor?: `#${string}`;
+}
+type AnyObject = { [key: string]: unknown };
+
+// Check if the value is empty
+const isEmptyValue = (value: unknown) => {
+  if (value === null || value === undefined) return true;
+  if (typeof value === 'string' && value.trim() === '') return true;
+  if (Array.isArray(value) && value.length === 0) return true;
+  if (typeof value === 'object' && Object.keys(value).length === 0) return true;
+  return false;
+};
+// Return true if one or more values are empty
+const hasEmptyValues = (obj: AnyObject): boolean => {
+  return Object.values(obj).some(isEmptyValue);
+};
+
 const predefinedKeywords = [
   'Bright',
   'Dark',
+  'Fresh',
   'Highlighted',
   'Realistic',
-  'Fresh',
 ];
 
-export default function UserGuidedForm() {
+export default function UserGuidedForm({
+  initialColor = '#anyColor',
+}: userGuidedFormProps) {
   const [purpose, setPurpose] = useState<string>('');
   const [purposeError, setPurposeError] = useState<boolean>(false);
 
@@ -30,7 +52,7 @@ export default function UserGuidedForm() {
   const [audience, setAudience] = useState<string>('');
   const [audienceError, setAudienceError] = useState<boolean>(false);
 
-  const [keywords, setKeywords] = useState<string>('');
+  const [keyword, setKeywords] = useState<string>('');
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [keywordsError, setKeywordsError] = useState<boolean>(false);
 
@@ -40,7 +62,7 @@ export default function UserGuidedForm() {
     switch (id) {
       case 'purpose':
         setPurpose(value);
-        setPurposeError(!countOneWord(event));
+        setPurposeError(!countChars(event));
         break;
       case 'audience':
         setAudience(value);
@@ -52,7 +74,6 @@ export default function UserGuidedForm() {
         break;
       case 'keywords':
         setKeywords(value);
-        setKeywordsError(!countFiveWords(event));
         break;
       default:
         break;
@@ -61,10 +82,6 @@ export default function UserGuidedForm() {
 
   const countOneWord = (event: React.ChangeEvent<HTMLInputElement>) => {
     return event.target.value.split(' ').length === 1;
-  };
-
-  const countFiveWords = (event: React.ChangeEvent<HTMLInputElement>) => {
-    return event.target.value.split(' ').length <= 5;
   };
 
   const countChars = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,11 +96,11 @@ export default function UserGuidedForm() {
 
   const handleAddCustomKeyword = () => {
     if (
-      keywords &&
-      !selectedKeywords.includes(keywords) &&
+      keyword &&
+      !selectedKeywords.includes(keyword) &&
       selectedKeywords.length < 5
     ) {
-      setSelectedKeywords([...selectedKeywords, keywords]);
+      setSelectedKeywords([...selectedKeywords, keyword]);
       setKeywords('');
     } else if (selectedKeywords.length >= 5) {
       setKeywordsError(true);
@@ -97,8 +114,18 @@ export default function UserGuidedForm() {
     setKeywordsError(false);
   };
 
+  const { updatePrompt } = useColorGenerator();
+
   const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const promptValues = {
+      initialColor: initialColor,
+      usage: purpose,
+      audience: audience,
+      keywords: selectedKeywords,
+      mood: mood,
+    };
 
     const allErrors = {
       purpose: purposeError,
@@ -107,17 +134,15 @@ export default function UserGuidedForm() {
       keywords: keywordsError,
     };
 
-    if (Object.values(allErrors).includes(true)) {
+    if (
+      Object.values(allErrors).includes(true) ||
+      hasEmptyValues(promptValues)
+    ) {
       return;
     }
 
-    //! Handle the submit, because all errors are false
-    // Should send to the API:
-    // While Don't have errors and the fields are not empty
-    // 1: the purpose
-    // 2: the mood
-    // 3: the audience
-    // 4: the keywords
+    const GUIDED = createGuidedColorPrompt(promptValues);
+    updatePrompt(GUIDED);
   };
 
   return (
@@ -135,13 +160,14 @@ export default function UserGuidedForm() {
                 <Label htmlFor="purpose">I need my color scheme for...</Label>
                 <Input
                   id="purpose"
-                  placeholder="Website, poster, outfit..."
+                  placeholder="Website, poster... (max: 255 characters)"
+                  maxLength={255}
                   autoComplete="off"
                   value={purpose}
                   onChange={handleChange}
                 />
                 <span className="text-red-700 p-0 text-sm min-h-5">
-                  {purposeError && errorMessage}
+                  {purposeError && 'Too many characters (Max: 255)'}
                 </span>
               </div>
 
@@ -170,7 +196,7 @@ export default function UserGuidedForm() {
                   onChange={handleChange}
                 />
                 <span className="text-red-700 p-0 text-sm min-h-5">
-                  {moodError && errorMessage}
+                  {moodError && 'Please use only one word, no spaces.'}
                 </span>
               </div>
 
@@ -183,7 +209,7 @@ export default function UserGuidedForm() {
                     id="keywords"
                     placeholder="Add custom keywords..."
                     autoComplete="off"
-                    value={keywords}
+                    value={keyword}
                     onChange={handleChange}
                   />
                   <Select onValueChange={handleSelectChange}>
@@ -200,22 +226,20 @@ export default function UserGuidedForm() {
                     Add
                   </Button>
                 </div>
+
                 <div className="flex flex-wrap gap-2 mt-2 text-sm">
                   {selectedKeywords.map((keyword, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center bg-gray-200 px-2 py-1 rounded"
-                    >
+                    <div key={index} className="bg-gray-200 px-1 rounded">
                       <span key={index} className="bg-gray-200 px-2 rounded">
                         {keyword}
                       </span>
-                      <button
+                      <Button
                         type="button"
+                        className="p-0 size-6 bg-transparent shadow-none text-black hover:bg-transparent hover:underline font-semibold px-1"
                         onClick={() => handleDeleteKeyword(keyword)}
-                        className="px-2"
                       >
                         X
-                      </button>
+                      </Button>
                     </div>
                   ))}
                 </div>
