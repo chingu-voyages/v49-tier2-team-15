@@ -13,9 +13,9 @@ import { Label } from '@/components/ui/label';
 //   SelectTrigger,
 // } from '@/components/ui/select';
 import { createGuidedColorPrompt } from '@/helpers/generators';
-import hasEmptyValues from '@/utils/checkEmptyValues';
-import countChars from '@/utils/countChars';
-import countOneWord from '@/utils/countOneWord';
+import hasEmptyValues from '@/utils/GuidedFormFunctions/checkEmptyValues';
+import countChars from '@/utils/GuidedFormFunctions/countChars';
+import countOneWord from '@/utils/GuidedFormFunctions/countOneWord';
 
 interface userGuidedFormProps {
   initialColor?: `#${string}`;
