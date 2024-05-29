@@ -1,3 +1,4 @@
+import ColorPicker from './components/colorPicker';
 import { Button } from './components/ui/button';
 import { useColorGenerator } from './hooks';
 import {
@@ -33,6 +34,7 @@ export default function App() {
       <p>{GUIDED}</p>
 
       <h2 className="text-xl">Colors</h2>
+      <ColorPicker />
       <div className="flex gap-4">
         {colors.map((clr) => (
           <div
