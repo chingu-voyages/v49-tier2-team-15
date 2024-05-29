@@ -6,41 +6,22 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from '@/components/ui/select';
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+// } from '@/components/ui/select';
 import { createGuidedColorPrompt } from '@/helpers/generators';
+import hasEmptyValues from '@/utils/checkEmptyValues';
+import countChars from '@/utils/countChars';
+import countOneWord from '@/utils/countOneWord';
 
 interface userGuidedFormProps {
   initialColor?: `#${string}`;
 }
-type AnyObject = { [key: string]: unknown };
 
-// Check if the value is empty
-const isEmptyValue = (value: unknown) => {
-  if (value === null || value === undefined) return true;
-  if (typeof value === 'string' && value.trim() === '') return true;
-  if (Array.isArray(value) && value.length === 0) return true;
-  if (typeof value === 'object' && Object.keys(value).length === 0) return true;
-  return false;
-};
-// Return true if one or more values are empty
-const hasEmptyValues = (obj: AnyObject): boolean => {
-  return Object.values(obj).some(isEmptyValue);
-};
-
-const predefinedKeywords = [
-  'Bright',
-  'Dark',
-  'Fresh',
-  'Highlighted',
-  'Realistic',
-];
-
-export default function UserGuidedForm({
+export default function GuidedForm({
   initialColor = '#anyColor',
 }: userGuidedFormProps) {
   const [purpose, setPurpose] = useState<string>('');
@@ -57,9 +38,9 @@ export default function UserGuidedForm({
   const [keywordsError, setKeywordsError] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = event.target;
+    const { name, value } = event.target;
 
-    switch (id) {
+    switch (name) {
       case 'purpose':
         setPurpose(value);
         setPurposeError(!countChars(event));
@@ -77,20 +58,6 @@ export default function UserGuidedForm({
         break;
       default:
         break;
-    }
-  };
-
-  const countOneWord = (event: React.ChangeEvent<HTMLInputElement>) => {
-    return event.target.value.split(' ').length === 1;
-  };
-
-  const countChars = (event: React.ChangeEvent<HTMLInputElement>) => {
-    return event.target.value.length <= 255;
-  };
-
-  const handleSelectChange = (value: string) => {
-    if (!selectedKeywords.includes(value) && selectedKeywords.length < 5) {
-      setSelectedKeywords([...selectedKeywords, value]);
     }
   };
 
@@ -160,8 +127,8 @@ export default function UserGuidedForm({
                 <Label htmlFor="purpose">I need my color scheme for...</Label>
                 <Input
                   id="purpose"
-                  placeholder="Website, poster... (max: 255 characters)"
-                  maxLength={255}
+                  name="purpose"
+                  placeholder="Website, poster... "
                   autoComplete="off"
                   value={purpose}
                   onChange={handleChange}
@@ -175,9 +142,9 @@ export default function UserGuidedForm({
                 <Label htmlFor="audience">My audience is...</Label>
                 <Input
                   id="audience"
-                  placeholder="Describe audience (max: 255 characters)"
+                  name="audience"
+                  placeholder="Describe audience"
                   autoComplete="off"
-                  maxLength={255}
                   value={audience}
                   onChange={handleChange}
                 />
@@ -190,6 +157,7 @@ export default function UserGuidedForm({
                 <Label htmlFor="mood">Choose a mood for colors...</Label>
                 <Input
                   id="mood"
+                  name="mood"
                   placeholder="Happy, sad, love..."
                   autoComplete="off"
                   value={mood}
@@ -207,21 +175,13 @@ export default function UserGuidedForm({
                 <div className="flex gap-1">
                   <Input
                     id="keywords"
+                    name="keywords"
                     placeholder="Add custom keywords..."
                     autoComplete="off"
                     value={keyword}
                     onChange={handleChange}
                   />
-                  <Select onValueChange={handleSelectChange}>
-                    <SelectTrigger className="w-12" />
-                    <SelectContent>
-                      {predefinedKeywords.map((keyword, index) => (
-                        <SelectItem key={index} value={keyword}>
-                          {keyword}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+
                   <Button type="button" onClick={handleAddCustomKeyword}>
                     Add
                   </Button>
