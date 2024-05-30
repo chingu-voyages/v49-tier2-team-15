@@ -24,19 +24,24 @@ export default function GuidedForm() {
 
   return (
     <div className="flex justify-center items-center">
-      <Card className="w-[640px]">
-        <CardHeader className="hidden md:block">
-          <CardTitle className="text-3xl">
-            Or get help here if you don’t know where to start...
+      <Card className="w-[640px] border-none bg-transparent">
+        <CardHeader className="px-0 py-3 md:py-6 text-neonGreen">
+          <CardTitle>
+            <span className="hidden md:block text-4xl font-normal">
+              Or get help here if you don’t know where to start...
+            </span>
+            <span className="md:hidden text-xl flex justify-center">
+              Guided Exprerience
+            </span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-6">
+        <CardContent className="p-0">
           <form
             onSubmit={(e) =>
               submitForm(e, state, selectedKeywords, dispatch, updatePrompt)
             }
           >
-            <div className="grid md:grid-cols-2 gap-x-4 gap-y-2">
+            <div className="grid md:grid-cols-2 gap-x-4 gap-y-2 border-4 border-neonGreen rounded-md  p-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="usage">I need my color scheme for...</Label>
                 <Input
@@ -46,6 +51,7 @@ export default function GuidedForm() {
                   autoComplete="off"
                   value={state.usage}
                   onChange={(e) => handleChange(e, dispatch)}
+                  className="bg-white"
                 />
                 <span className="text-red-700 p-0 text-sm min-h-5">
                   {state.usageError}
@@ -61,6 +67,7 @@ export default function GuidedForm() {
                   autoComplete="off"
                   value={state.audience}
                   onChange={(e) => handleChange(e, dispatch)}
+                  className="bg-white"
                 />
                 <span className="text-red-700 p-0 text-sm min-h-5">
                   {state.audienceError}
@@ -76,6 +83,7 @@ export default function GuidedForm() {
                   autoComplete="off"
                   value={state.mood}
                   onChange={(e) => handleChange(e, dispatch)}
+                  className="bg-white"
                 />
                 <span className="text-red-700 p-0 text-sm min-h-5">
                   {state.moodError}
@@ -94,6 +102,7 @@ export default function GuidedForm() {
                     autoComplete="off"
                     value={state.keywords}
                     onChange={(e) => handleChange(e, dispatch)}
+                    className="bg-white"
                   />
 
                   <Button
@@ -106,6 +115,7 @@ export default function GuidedForm() {
                         dispatch,
                       )
                     }
+                    className="bg-transparent border-4 text-neonGreen border-neonGreen  hover:bg-neonGreen hover:text-white transition-colors duration-500"
                   >
                     Add
                   </Button>
@@ -141,7 +151,10 @@ export default function GuidedForm() {
             </div>
 
             <div className="pt-4 flex justify-center md:justify-end items-center">
-              <Button type="submit" className="md:px-24 px-16 py-6">
+              <Button
+                type="submit"
+                className="md:px-8 px-12 py-6 bg-transparent border-4 text-neonGreen border-neonGreen text-lg hover:bg-neonGreen hover:text-white transition-colors duration-500"
+              >
                 See my colour palette
               </Button>
             </div>
