@@ -5,8 +5,8 @@ const ColorPicker = () => {
   const [currentColor, setCurrentColor] = useState('#39FF14');
 
   function handleColorChange(color) {
-    console.log(color);
-    // setCurrentColor(color);
+    console.log(color.hex);
+    setCurrentColor(color.hex);
   }
 
   return (
@@ -17,10 +17,9 @@ const ColorPicker = () => {
           className="color-display h-32 justify-center content-center rounded-md"
           style={{ backgroundColor: currentColor }}
         >
-          <p className="text-center">Selected Color</p>
+          <p className="text-center">{currentColor}</p>
         </div>
         {/* <label htmlFor="SelectedColor">Select a Color</label> */}
-        <input type="text" value={currentColor} />
       </div>
     </div>
   );
