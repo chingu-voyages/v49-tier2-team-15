@@ -6,21 +6,26 @@ import { Button } from '../ui/button';
 import { createBasicColorPrompt } from '@/helpers/generators';
 import { useColorGenerator } from '@/hooks';
 
-const BASIC = createBasicColorPrompt({
-  initialColor: '#579fde',
-  usage: 'social media',
-});
-
 const ColorPicker = () => {
   const [currentColor, setCurrentColor] = useState('#39FF14');
+  const [usage, setUsage] = useState('interior design');
 
-  function handleColorChange(color) {
-    console.log(color.hex);
-    setCurrentColor(color.hex);
-  }
+  const BASIC = createBasicColorPrompt({
+    initialColor: currentColor,
+    usage: usage,
+  });
+
+  const handleColorChange = (color) => {
+    setCurrentColor(`${color.hex}`);
+  };
+
+  const handleUsageChange = (event) => {
+    // console.log(event.target.value);
+    setUsage(event.target.value);
+  };
 
   function handleGetColors() {
-    console.log(currentColor);
+    // console.log(`${currentColor} & ${usage}`);
     updatePrompt(BASIC);
   }
 
@@ -36,7 +41,14 @@ const ColorPicker = () => {
         >
           <p className="text-center">{currentColor}</p>
         </div>
-        <Button className="my-3 w-full" onClick={handleGetColors}>
+        <input
+          onChange={handleUsageChange}
+          type="text"
+          placeholder="I'm using these colors for..."
+          name="basic-usage"
+          className="block w-full rounded-md border-0 px-3.5 py-2 my-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        ></input>
+        <Button className=" w-full" onClick={handleGetColors}>
           Get me some color matches!
         </Button>
         <h2 className="text-xl">Loading Status</h2>
