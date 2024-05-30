@@ -4,13 +4,14 @@ import React, { useState } from 'react';
 const ColorPicker = () => {
   const [currentColor, setCurrentColor] = useState('#39FF14');
 
-  // function handleColorchange(event) {
-  //   setColor(event.target.value);
-  // }
+  function handleColorChange(color) {
+    console.log(color);
+    // setCurrentColor(color);
+  }
 
   return (
     <div className="color-picker-container flex justify-between w-1/2">
-      <Sketch color={currentColor} />
+      <Sketch color={currentColor} onChange={handleColorChange} />
       <div className="w-3/5">
         <div
           className="color-display h-32 justify-center content-center rounded-md"
