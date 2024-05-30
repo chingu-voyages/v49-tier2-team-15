@@ -1,4 +1,4 @@
-type AnyObject = { [key: string]: unknown };
+import { GuidedColorPrompt } from '@/types';
 
 // Check if the value is empty
 function isEmptyValue(value: unknown) {
@@ -9,6 +9,6 @@ function isEmptyValue(value: unknown) {
   return false;
 }
 // Return true if one or more values are empty
-export default function hasEmptyValues(obj: AnyObject): boolean {
+export default function hasEmptyValues(obj: GuidedColorPrompt): boolean {
   return Object.values(obj).some(isEmptyValue);
 }

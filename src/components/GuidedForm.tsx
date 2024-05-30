@@ -1,116 +1,26 @@
-import React, { useState } from 'react';
-
-import { useColorGenerator } from '../hooks';
+import { useReducer, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-// } from '@/components/ui/select';
-import { createGuidedColorPrompt } from '@/helpers/generators';
-import hasEmptyValues from '@/utils/GuidedFormFunctions/checkEmptyValues';
-import countChars from '@/utils/GuidedFormFunctions/countChars';
-import countOneWord from '@/utils/GuidedFormFunctions/countOneWord';
+import { useColorGenerator } from '@/hooks';
+import {
+  formReducer,
+  initialFormValues,
+} from '@/utils/GuidedFormFunctions/formReducer';
+import handleChange from '@/utils/GuidedFormFunctions/handleChange';
+import {
+  handleAddCustomKeyword,
+  handleDeleteKeyword,
+} from '@/utils/GuidedFormFunctions/handleKeywords';
+import submitForm from '@/utils/GuidedFormFunctions/submitForm';
 
-interface userGuidedFormProps {
-  initialColor?: `#${string}`;
-}
-
-export default function GuidedForm({
-  initialColor = '#anyColor',
-}: userGuidedFormProps) {
-  const [purpose, setPurpose] = useState<string>('');
-  const [purposeError, setPurposeError] = useState<boolean>(false);
-
-  const [mood, setMood] = useState<string>('');
-  const [moodError, setMoodError] = useState<boolean>(false);
-
-  const [audience, setAudience] = useState<string>('');
-  const [audienceError, setAudienceError] = useState<boolean>(false);
-
-  const [keyword, setKeywords] = useState<string>('');
+export default function GuidedForm2() {
+  const [state, dispatch] = useReducer(formReducer, initialFormValues);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-  const [keywordsError, setKeywordsError] = useState<boolean>(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-
-    switch (name) {
-      case 'purpose':
-        setPurpose(value);
-        setPurposeError(!countChars(event));
-        break;
-      case 'audience':
-        setAudience(value);
-        setAudienceError(!countChars(event));
-        break;
-      case 'mood':
-        setMood(value);
-        setMoodError(!countOneWord(event));
-        break;
-      case 'keywords':
-        setKeywords(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleAddCustomKeyword = () => {
-    if (
-      keyword &&
-      !selectedKeywords.includes(keyword) &&
-      selectedKeywords.length < 5
-    ) {
-      setSelectedKeywords([...selectedKeywords, keyword]);
-      setKeywords('');
-    } else if (selectedKeywords.length >= 5) {
-      setKeywordsError(true);
-    } else {
-      setKeywordsError(false);
-    }
-  };
-
-  const handleDeleteKeyword = (keyword: string) => {
-    setSelectedKeywords(selectedKeywords.filter((word) => word !== keyword));
-    setKeywordsError(false);
-  };
 
   const { updatePrompt } = useColorGenerator();
-
-  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const promptValues = {
-      initialColor: initialColor,
-      usage: purpose,
-      audience: audience,
-      keywords: selectedKeywords,
-      mood: mood,
-    };
-
-    const allErrors = {
-      purpose: purposeError,
-      mood: moodError,
-      audience: audienceError,
-      keywords: keywordsError,
-    };
-
-    if (
-      Object.values(allErrors).includes(true) ||
-      hasEmptyValues(promptValues)
-    ) {
-      return;
-    }
-
-    const GUIDED = createGuidedColorPrompt(promptValues);
-    updatePrompt(GUIDED);
-  };
 
   return (
     <div className="flex justify-center items-center">
@@ -121,20 +31,24 @@ export default function GuidedForm({
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6">
-          <form onSubmit={submitForm}>
+          <form
+            onSubmit={(e) =>
+              submitForm(e, state, selectedKeywords, dispatch, updatePrompt)
+            }
+          >
             <div className="grid md:grid-cols-2 gap-x-4 gap-y-2">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="purpose">I need my color scheme for...</Label>
+                <Label htmlFor="usage">I need my color scheme for...</Label>
                 <Input
-                  id="purpose"
-                  name="purpose"
+                  id="usage"
+                  name="usage"
                   placeholder="Website, poster... "
                   autoComplete="off"
-                  value={purpose}
-                  onChange={handleChange}
+                  value={state.usage}
+                  onChange={(e) => handleChange(e, dispatch)}
                 />
                 <span className="text-red-700 p-0 text-sm min-h-5">
-                  {purposeError && 'Too many characters (Max: 255)'}
+                  {state.usageError}
                 </span>
               </div>
 
@@ -145,11 +59,11 @@ export default function GuidedForm({
                   name="audience"
                   placeholder="Describe audience"
                   autoComplete="off"
-                  value={audience}
-                  onChange={handleChange}
+                  value={state.audience}
+                  onChange={(e) => handleChange(e, dispatch)}
                 />
                 <span className="text-red-700 p-0 text-sm min-h-5">
-                  {audienceError && 'Too many characters (Max: 255)'}
+                  {state.audienceError}
                 </span>
               </div>
 
@@ -160,11 +74,11 @@ export default function GuidedForm({
                   name="mood"
                   placeholder="Happy, sad, love..."
                   autoComplete="off"
-                  value={mood}
-                  onChange={handleChange}
+                  value={state.mood}
+                  onChange={(e) => handleChange(e, dispatch)}
                 />
                 <span className="text-red-700 p-0 text-sm min-h-5">
-                  {moodError && 'Please use only one word, no spaces.'}
+                  {state.moodError}
                 </span>
               </div>
 
@@ -178,11 +92,21 @@ export default function GuidedForm({
                     name="keywords"
                     placeholder="Add custom keywords..."
                     autoComplete="off"
-                    value={keyword}
-                    onChange={handleChange}
+                    value={state.keywords}
+                    onChange={(e) => handleChange(e, dispatch)}
                   />
 
-                  <Button type="button" onClick={handleAddCustomKeyword}>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      handleAddCustomKeyword(
+                        state,
+                        selectedKeywords,
+                        setSelectedKeywords,
+                        dispatch,
+                      )
+                    }
+                  >
                     Add
                   </Button>
                 </div>
@@ -196,7 +120,14 @@ export default function GuidedForm({
                       <Button
                         type="button"
                         className="p-0 size-6 bg-transparent shadow-none text-black hover:bg-transparent hover:underline font-semibold px-1"
-                        onClick={() => handleDeleteKeyword(keyword)}
+                        onClick={() =>
+                          handleDeleteKeyword(
+                            keyword,
+                            selectedKeywords,
+                            setSelectedKeywords,
+                            dispatch,
+                          )
+                        }
                       >
                         X
                       </Button>
@@ -204,8 +135,7 @@ export default function GuidedForm({
                   ))}
                 </div>
                 <span className="text-red-700 p-0 text-sm min-h-5">
-                  {keywordsError &&
-                    'Maximum number of keywords exceeded. Only 5 keywords are allowed.'}
+                  {state.keywordsError}
                 </span>
               </div>
             </div>
