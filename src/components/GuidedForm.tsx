@@ -16,7 +16,7 @@ import {
 } from '@/utils/GuidedFormFunctions/handleKeywords';
 import submitForm from '@/utils/GuidedFormFunctions/submitForm';
 
-export default function GuidedForm2() {
+export default function GuidedForm() {
   const [state, dispatch] = useReducer(formReducer, initialFormValues);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
