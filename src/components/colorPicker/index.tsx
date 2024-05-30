@@ -1,12 +1,18 @@
 import { Sketch } from '@uiw/react-color';
 import React, { useState } from 'react';
 
+import { Button } from '../ui/button';
+
 const ColorPicker = () => {
   const [currentColor, setCurrentColor] = useState('#39FF14');
 
   function handleColorChange(color) {
     console.log(color.hex);
     setCurrentColor(color.hex);
+  }
+
+  function handleGetColors() {
+    console.log(currentColor);
   }
 
   return (
@@ -19,7 +25,9 @@ const ColorPicker = () => {
         >
           <p className="text-center">{currentColor}</p>
         </div>
-        {/* <label htmlFor="SelectedColor">Select a Color</label> */}
+        <Button className="my-3 w-full" onClick={handleGetColors}>
+          Get me some color matches!
+        </Button>
       </div>
     </div>
   );
