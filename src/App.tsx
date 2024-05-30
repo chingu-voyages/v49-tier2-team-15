@@ -1,5 +1,8 @@
+import { useContext } from 'react';
+
 import { Button } from './components/ui/button';
-import { useColorGenerator } from './hooks';
+import { ColorContext } from './contexts/ColorContext';
+import { ColorContextValue } from './types';
 import {
   createBasicColorPrompt,
   createGuidedColorPrompt,
@@ -19,7 +22,9 @@ const GUIDED = createGuidedColorPrompt({
 });
 
 export default function App() {
-  const { colors, loading, error, updatePrompt } = useColorGenerator();
+  const { colors, loading, error, updatePrompt } = useContext(
+    ColorContext,
+  ) as ColorContextValue;
 
   function handleClick() {
     updatePrompt(GUIDED);
