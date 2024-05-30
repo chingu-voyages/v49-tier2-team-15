@@ -2,14 +2,14 @@ import ColorPicker from './components/colorPicker';
 import { Button } from './components/ui/button';
 import { useColorGenerator } from './hooks';
 import {
-  createBasicColorPrompt,
+  // createBasicColorPrompt,
   createGuidedColorPrompt,
 } from '@/helpers/generators';
 
-const BASIC = createBasicColorPrompt({
-  initialColor: '#579fde',
-  usage: 'social media',
-});
+// const BASIC = createBasicColorPrompt({
+//   initialColor: '#579fde',
+//   usage: 'social media',
+// });
 
 const GUIDED = createGuidedColorPrompt({
   initialColor: '#579fde',
