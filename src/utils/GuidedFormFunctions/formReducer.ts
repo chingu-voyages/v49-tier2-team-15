@@ -1,4 +1,4 @@
-import { initialFormValues } from './types'
+import { initialFormValues } from './types';
 
 export function formReducer(
   state: initialFormValues,

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useColorGenerator } from '@/hooks';
 import { formReducer } from '@/utils/GuidedFormFunctions/formReducer';
 import handleChange from '@/utils/GuidedFormFunctions/handleChange';
 import {
@@ -11,7 +12,6 @@ import {
   handleDeleteKeyword,
 } from '@/utils/GuidedFormFunctions/handleKeywords';
 import submitForm from '@/utils/GuidedFormFunctions/submitForm';
-import { useColorGenerator } from '@/hooks';
 
 export default function GuidedForm() {
   const initialFormValues = {
@@ -20,10 +20,10 @@ export default function GuidedForm() {
     mood: '',
     keywords: '',
     keywordsError: '',
-  }
+  };
   const [state, dispatch] = useReducer(formReducer, initialFormValues);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-  const { updatePrompt } = useColorGenerator()
+  const { updatePrompt } = useColorGenerator();
 
   return (
     <div className="flex justify-center items-center">
@@ -46,7 +46,9 @@ export default function GuidedForm() {
           >
             <div className="grid md:grid-cols-2 gap-x-4 gap-y-2 border-4 border-neonGreen rounded-md  p-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="usage"><span className='bold'>*</span> I need my color scheme for...</Label>
+                <Label htmlFor="usage">
+                  <span className="bold">*</span> I need my color scheme for...
+                </Label>
                 <Input
                   id="usage"
                   name="usage"
@@ -60,7 +62,9 @@ export default function GuidedForm() {
               </div>
 
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="audience"><span className='bold'>*</span> My audience is...</Label>
+                <Label htmlFor="audience">
+                  <span className="bold">*</span> My audience is...
+                </Label>
                 <Input
                   id="audience"
                   name="audience"
@@ -74,7 +78,11 @@ export default function GuidedForm() {
               </div>
 
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="mood"><span className='bold'>*</span> Choose <b className=' underline underline-offset-1'>one</b> mood for colors...</Label>
+                <Label htmlFor="mood">
+                  <span className="bold">*</span> Choose{' '}
+                  <b className=" underline underline-offset-1">one</b> mood for
+                  colors...
+                </Label>
                 <Input
                   id="mood"
                   name="mood"

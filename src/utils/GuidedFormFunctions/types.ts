@@ -9,14 +9,14 @@ export type FormAction =
   | SetAudienceAction
   | SetMoodAction
   | SetKeywordsAction
-  | SetKeywordsErrorAction
+  | SetKeywordsErrorAction;
 
 export type Dispatch = (action: FormAction) => void;
 
 export type initialFormValues = {
-    usage: string;
-    audience: string;
-    mood: string;
-    keywords: string;
-    keywordsError: string;
-  };
+  usage: string;
+  audience: string;
+  mood: string;
+  keywords: string;
+  keywordsError: string;
+};
