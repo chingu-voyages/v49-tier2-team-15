@@ -1,16 +1,16 @@
+import ColorPicker from './components/colorPicker';
 import { useContext } from 'react';
-
 import { Button } from './components/ui/button';
 import { useColorGenerator } from './hooks';
 import { ColorPreview } from '@/components';
 import {
-  createBasicColorPrompt,
+  // createBasicColorPrompt,
   createGuidedColorPrompt,
 } from '@/helpers/generators';
 
 const BASIC = createBasicColorPrompt({
-  initialColor: '#579fde',
-  usage: 'social media',
+   initialColor: '#579fde',
+   usage: 'social media',
 });
 
 const GUIDED = createGuidedColorPrompt({
@@ -38,6 +38,7 @@ export default function App() {
       <p>{GUIDED}</p>
 
       <h2 className="text-xl">Colors</h2>
+      <ColorPicker />
       <ColorPreview colors={colors} />
 
       <h2 className="text-xl">Loading Status</h2>
