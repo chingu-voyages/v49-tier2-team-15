@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router-dom';
 
 import Footer from '@/components/footer';
-import Header from '@/components/header';
+import Navigation from '@/components/navigation';
 import ColorProvider from '@/context/ColorContext';
 
 const Root = () => {
   return (
     <ColorProvider>
       <div className="container flex flex-col min-h-screen">
-        <Header />
+        <Navigation />
         <main className="flex-1 p-20 space-y-8">
           <Outlet />
         </main>

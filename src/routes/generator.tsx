@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
-import { Button } from './components/ui/button';
 import { ColorPreview } from '@/components';
+import { Button } from '@/components/ui/button';
 import { ColorContext } from '@/context/ColorContext';
 import {
   createBasicColorPrompt,
@@ -21,7 +21,7 @@ const GUIDED = createGuidedColorPrompt({
   mood: 'sad',
 });
 
-export default function App() {
+export default function Generator() {
   const { accentColor, colors, loading, error, updatePrompt } =
     useContext(ColorContext);
 

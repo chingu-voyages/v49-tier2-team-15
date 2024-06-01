@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   NavigationMenu,
@@ -12,21 +13,14 @@ const links = [
   {
     path: '/',
     title: 'Home',
-    description: 'The home page',
   },
   {
-    path: '/about',
-    title: 'About',
-    description: 'The about page',
-  },
-  {
-    path: '/ai-generator',
-    title: 'AI Generator',
-    description: 'The AI generator page',
+    path: '/generator',
+    title: 'Color Generator',
   },
 ];
 
-const Header = () => {
+const Navigation = () => {
   return (
     <header className="py-4 px-2">
       <NavigationMenu className="max-w-full">
@@ -43,11 +37,12 @@ const Header = () => {
 const ListItem = React.forwardRef<
   React.ElementRef<'a'>,
   React.ComponentPropsWithoutRef<'a'>
->(({ className, title, children, ...props }, ref) => {
+>(({ className, title, children, href, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
+        <Link
+          to={href!}
           ref={ref}
           className={cn(
             'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
@@ -59,11 +54,11 @@ const ListItem = React.forwardRef<
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   );
 });
 ListItem.displayName = 'ListItem';
 
-export default Header;
+export default Navigation;
