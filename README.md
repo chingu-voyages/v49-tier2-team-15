@@ -1,43 +1,35 @@
-# voyage-tasks
+# Color Inspo
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+- [Overview](#overview)
+- [Environment Variables Setup](#environment-variables-setup)
+- [How to get OpenAI Api Key](#how-to-get-openai-api-key)
+- [Our Team](#our-team)
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+## Overview
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+Project description here (TBD)
 
-> Own it & Make it your Own!
+### Environment Variables Setup:
 
-## Team Documents
+Create a .env file with a variable called `VITE_OPENAI_API_KEY`, following the example below:
 
-You may find these helpful as you work together to organize your project.
+```bash
+VITE_OPENAI_API_KEY=6c793695171e793d7d0080ad7700
+```
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+### How to get OpenAI Api Key:
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
+Go to [OpenAI API website](https://platform.openai.com) and login with your account, then navigate to [/api-keys](https://platform.openai.com/api-keys) to generate your Personal Api Key.
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+Useful Guide:
+[Managing your work in the API platform with Projects](https://help.openai.com/en/articles/9186755-managing-your-work-in-the-api-platform-with-projects)
+
+**Note**: You _do_ have to add credits in OpenAI to use their API, but $5,00 should last a few months, and it should be more than enough for this project pourpose, as we're not going to deploy our API keys.
 
 ## Our Team
 
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team *before* you start
-coding!
-
-- Stanislav #1: [GitHub](https://github.com/KoatKoetl) / [LinkedIn](https://www.linkedin.com/in/stanislav-suschevici-a4617228a/)
-- Dominic #2: [GitHub](https://github.com/SirDominique) / [LinkedIn](https://www.linkedin.com/in/dominic-quansah-psm-i-psm-ii-4a2174101/)
-- Victoria #3: [GitHub](https://github.com/VriaA) / [LinkedIn](https://www.linkedin.com/in/victoriaoyelola/)
-- Nicola #4: [Github](https://github.com/NicolaHearn) / [LinkedIn](https://www.linkedin.com/in/nicola-hearn-07449720/)
-
-   ...
-- Teammate name #n: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Stanislav: [GitHub](https://github.com/KoatKoetl) / [LinkedIn](https://www.linkedin.com/in/stanislav-suschevici-a4617228a/)
+- Dominic: [GitHub](https://github.com/SirDominique) / [LinkedIn](https://www.linkedin.com/in/dominic-quansah-psm-i-psm-ii-4a2174101/)
+- Victoria: [GitHub](https://github.com/VriaA) / [LinkedIn](https://www.linkedin.com/in/victoriaoyelola/)
+- Nicola: [Github](https://github.com/NicolaHearn) / [LinkedIn](https://www.linkedin.com/in/nicola-hearn-07449720/)
+- Felipe: [Github](https://github.com/feliperdamaceno) / [LinkedIn](https://www.linkedin.com/in/feliperdamaceno)
