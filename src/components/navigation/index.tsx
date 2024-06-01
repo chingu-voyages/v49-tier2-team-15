@@ -17,31 +17,25 @@ import {
 import { ColorContext } from '@/context/ColorContext';
 import { cn } from '@/lib/utils';
 
-const links = [
-  {
-    path: '/',
-    icon: <HomeIcon />,
-  },
-  {
-    path: '/generator',
-    icon: <GenerateIcon />,
-  },
-];
-
 const Navigation = () => {
-  const { isDarkMode, toggleDarkMode } = useContext(ColorContext);
+  const { accentColor, isDarkMode, toggleDarkMode } = useContext(ColorContext);
 
   return (
-    <header className="py-4 px-2">
+    <header className="px-2 py-4">
       <NavigationMenu className="max-w-full">
         <NavigationMenuList>
-          {links.map((link, index) => (
-            <ListItem key={link.path + index} href={link.path}>
-              {link.icon}
-            </ListItem>
-          ))}
+          <ListItem href="/">
+            <HomeIcon stroke={accentColor} size={20} />
+          </ListItem>
+          <ListItem href="/generator">
+            <GenerateIcon stroke={accentColor} size={20} />
+          </ListItem>
           <ListItem onClick={toggleDarkMode}>
-            {isDarkMode ? <DarkIcon /> : <LightIcon />}
+            {isDarkMode ? (
+              <DarkIcon stroke={accentColor} size={20} />
+            ) : (
+              <LightIcon stroke={accentColor} size={20} />
+            )}
           </ListItem>
         </NavigationMenuList>
       </NavigationMenu>
@@ -66,7 +60,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
             {children}
           </p>
         </Link>
