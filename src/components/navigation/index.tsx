@@ -1,4 +1,11 @@
 import * as React from 'react';
+import { useContext } from 'react';
+import {
+  FiMoon as DarkIcon,
+  FiAperture as GenerateIcon,
+  FiHome as HomeIcon,
+  FiSun as LightIcon,
+} from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import {
@@ -7,27 +14,35 @@ import {
   NavigationMenuList,
 } from '../ui/navigation-menu';
 
+import { ColorContext } from '@/context/ColorContext';
 import { cn } from '@/lib/utils';
 
 const links = [
   {
     path: '/',
-    title: 'Home',
+    icon: <HomeIcon />,
   },
   {
     path: '/generator',
-    title: 'Color Generator',
+    icon: <GenerateIcon />,
   },
 ];
 
 const Navigation = () => {
+  const { isDarkMode, toggleDarkMode } = useContext(ColorContext);
+
   return (
     <header className="py-4 px-2">
       <NavigationMenu className="max-w-full">
         <NavigationMenuList>
-          {links.map((link) => (
-            <ListItem key={link.title} title={link.title} href={link.path} />
+          {links.map((link, index) => (
+            <ListItem key={link.path + index} href={link.path}>
+              {link.icon}
+            </ListItem>
           ))}
+          <ListItem onClick={toggleDarkMode}>
+            {isDarkMode ? <DarkIcon /> : <LightIcon />}
+          </ListItem>
         </NavigationMenuList>
       </NavigationMenu>
     </header>
