@@ -1,6 +1,7 @@
 import { Sketch } from '@uiw/react-color';
 import type { ColorResult } from '@uiw/react-color';
 import { ChangeEvent, FormEvent, useContext, useState } from 'react';
+import { AiOutlineLoading3Quarters as LoadingIcon } from 'react-icons/ai';
 
 import { Button } from '@/components/ui/button';
 import { ColorContext } from '@/context/ColorContext';
@@ -47,7 +48,11 @@ const BasicForm = () => {
           className="grid w-full p-16 font-medium text-white rounded-md aspect-square place-content-center"
           style={{ backgroundColor: currentColor }}
         >
-          {loading ? <span>Loading...</span> : currentColor}
+          {loading ? (
+            <LoadingIcon size={40} className="animate-spin" />
+          ) : (
+            currentColor
+          )}
         </div>
 
         <input
