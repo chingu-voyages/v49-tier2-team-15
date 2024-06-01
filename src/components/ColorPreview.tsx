@@ -1,11 +1,11 @@
+import { useContext } from 'react';
+
+import { ColorContext } from '@/context/ColorContext';
 import { getWCAGTextColor } from '@/lib/colors';
-import type { HEX } from '@/types';
 
-interface ColorPreviewProps {
-  colors: HEX[];
-}
+export default function ColorPreview() {
+  const { colors } = useContext(ColorContext);
 
-export default function ColorPreview({ colors }: ColorPreviewProps) {
   return (
     <section
       className="flex flex-col flex-wrap md:flex-row"
