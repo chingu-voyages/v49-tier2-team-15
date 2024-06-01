@@ -20,12 +20,14 @@
     "react-dom": "18.2.0",
     "react-router-dom": "6.23.1",
     "tailwind-merge": "2.3.0",
-    "tailwindcss-animate": "1.0.7"
+    "tailwindcss-animate": "1.0.7",
+    "wcag-contrast": "3.0.0"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "4.3.0",
     "@types/react": "18.2.66",
     "@types/react-dom": "18.2.22",
+    "@types/wcag-contrast": "3.0.3",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
     "@vitejs/plugin-react": "4.2.1",
