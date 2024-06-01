@@ -9,7 +9,7 @@ const Root = () => {
     <ColorProvider>
       <div className="container flex flex-col min-h-screen">
         <Navigation />
-        <main className="flex-1 p-20 space-y-8">
+        <main className="flex-1 space-y-8">
           <Outlet />
         </main>
         <Footer />

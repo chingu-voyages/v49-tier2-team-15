@@ -1,4 +1,11 @@
 import * as React from 'react';
+import { useContext } from 'react';
+import {
+  FiMoon as DarkIcon,
+  FiAperture as GenerateIcon,
+  FiHome as HomeIcon,
+  FiSun as LightIcon,
+} from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import {
@@ -7,27 +14,29 @@ import {
   NavigationMenuList,
 } from '../ui/navigation-menu';
 
+import { ColorContext } from '@/context/ColorContext';
 import { cn } from '@/lib/utils';
 
-const links = [
-  {
-    path: '/',
-    title: 'Home',
-  },
-  {
-    path: '/generator',
-    title: 'Color Generator',
-  },
-];
-
 const Navigation = () => {
+  const { accentColor, isDarkMode, toggleDarkMode } = useContext(ColorContext);
+
   return (
-    <header className="py-4 px-2">
+    <header className="px-2 py-4">
       <NavigationMenu className="max-w-full">
         <NavigationMenuList>
-          {links.map((link) => (
-            <ListItem key={link.title} title={link.title} href={link.path} />
-          ))}
+          <ListItem href="/">
+            <HomeIcon stroke={accentColor} size={20} />
+          </ListItem>
+          <ListItem href="/generator">
+            <GenerateIcon stroke={accentColor} size={20} />
+          </ListItem>
+          <ListItem onClick={toggleDarkMode}>
+            {isDarkMode ? (
+              <DarkIcon stroke={accentColor} size={20} />
+            ) : (
+              <LightIcon stroke={accentColor} size={20} />
+            )}
+          </ListItem>
         </NavigationMenuList>
       </NavigationMenu>
     </header>
@@ -51,7 +60,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="text-sm leading-snug line-clamp-2 text-muted-foreground">
             {children}
           </p>
         </Link>

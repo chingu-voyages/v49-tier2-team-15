@@ -9,7 +9,7 @@ export default function InfoSection() {
 
   return (
     <div className="flex flex-col items-center justify-center p-5 text-center">
-      <p className="my-6 max-w-7xl">
+      <p className="my-6 max-w-4xl dark:bg-foreground dark:text-secondary p-8 rounded-lg">
         <span>
           Let's consider the importance of colors in our lives. These bright
           shades not only decorate our surroundings but also affect our feelings
@@ -27,6 +27,7 @@ export default function InfoSection() {
           projects, and more.
         </span>
       </p>
+
       <Link to="generator">
         <Button style={{ color: accentColor, borderColor: accentColor }}>
           Get me some colours

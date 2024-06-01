@@ -9,9 +9,9 @@ import {
 import useColorGenerator from '@/hooks/useColorGenerator';
 import { HEX } from '@/types';
 
-export type ColorContextType = {
-  theme: 'light' | 'dark';
-  updateTheme: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
+type ColorContextType = {
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
   colors: HEX[];
   accentColor: HEX;
   updatePrompt: (prompt: string | null) => void;
@@ -28,24 +28,28 @@ export interface ColorProviderProps {
 }
 
 export default function ColorProvider({ children }: ColorProviderProps) {
+  const { colors, loading, error, updatePrompt } = useColorGenerator();
+  const [accentColor, setAccentColor] = useState<HEX>(initialAccentColor);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   // checks if the preferred browser theme is dark
   const isBrowserPreferenceDark: MediaQueryList = window.matchMedia(
     '(prefers-color-scheme: dark)',
   );
 
-  const [theme, setTheme] = useState<'light' | 'dark'>(
-    isBrowserPreferenceDark.matches ? 'dark' : 'light',
-  );
-  const [accentColor, setAccentColor] = useState<HEX>(initialAccentColor);
-  const { colors, loading, error, updatePrompt } = useColorGenerator();
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => !prev);
+    document.documentElement.classList.toggle('dark');
+  };
+
+  const handleThemeChange = useCallback((event: MediaQueryListEvent) => {
+    setIsDarkMode(event.matches);
+    document.documentElement.classList.toggle('dark');
+  }, []);
 
   useEffect(() => {
     setAccentColor((current) => colors[0] ?? current);
   }, [colors]);
-
-  const handleThemeChange = useCallback((event: MediaQueryListEvent) => {
-    setTheme(event.matches ? 'dark' : 'light');
-  }, []);
 
   useEffect(() => {
     isBrowserPreferenceDark.addEventListener('change', handleThemeChange);
@@ -57,9 +61,9 @@ export default function ColorProvider({ children }: ColorProviderProps) {
   return (
     <ColorContext.Provider
       value={{
-        theme,
+        isDarkMode,
+        toggleDarkMode,
         accentColor,
-        updateTheme: setTheme,
         error,
         updatePrompt,
         loading,
