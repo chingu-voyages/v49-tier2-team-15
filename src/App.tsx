@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
 import { Button } from './components/ui/button';
-import { useColorGenerator } from './hooks';
 import { ColorPreview } from '@/components';
+import { ColorContext } from '@/context/ColorContext';
 import {
   createBasicColorPrompt,
   createGuidedColorPrompt,
@@ -22,9 +22,8 @@ const GUIDED = createGuidedColorPrompt({
 });
 
 export default function App() {
-  const { colors, loading, error, updatePrompt } = useContext(
-    ColorContext,
-  ) as ColorContextValue;
+  const { accentColor, colors, loading, error, updatePrompt } =
+    useContext(ColorContext);
 
   function handleClick() {
     updatePrompt(GUIDED);
@@ -32,7 +31,12 @@ export default function App() {
 
   return (
     <>
-      <h1 className="text-2xl">Color App</h1>
+      <div
+        className="border-2 p-4 rounded-sm"
+        style={{ borderColor: accentColor }}
+      >
+        <h1 className="text-2xl">Color App</h1>
+      </div>
 
       <h2 className="text-xl">Prompt</h2>
       <p>{GUIDED}</p>

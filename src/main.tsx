@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './index.css';
-import { RoutesProvider } from './routes';
+import '@/index.css';
+import { RoutesProvider } from '@/routes';
 
 const domElement = document.getElementById('root');
 

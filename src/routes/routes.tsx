@@ -1,8 +1,8 @@
 import { RouteObject } from 'react-router-dom';
 
-import Root from './Root';
 import App from '@/App';
 import ErrorPage from '@/error-page';
+import Root from '@/routes/root';
 
 const routes: RouteObject[] = [
   {
