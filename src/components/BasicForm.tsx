@@ -33,7 +33,7 @@ const BasicForm = () => {
 
   return (
     <form
-      className="flex flex-wrap justify-center gap-6"
+      className="flex flex-wrap justify-center gap-6 md:justify-normal"
       onSubmit={handleSubmit}
     >
       <Sketch
