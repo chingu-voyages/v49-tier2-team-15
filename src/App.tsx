@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
 import { Button } from './components/ui/button';
-import { ColorContext } from './contexts/ColorContext';
-import { ColorContextValue } from './types';
+import { useColorGenerator } from './hooks';
+import { ColorPreview } from '@/components';
 import {
   createBasicColorPrompt,
   createGuidedColorPrompt,
@@ -38,16 +38,7 @@ export default function App() {
       <p>{GUIDED}</p>
 
       <h2 className="text-xl">Colors</h2>
-      <div className="flex gap-4">
-        {colors.map((clr) => (
-          <div
-            className="grid w-20 h-20 font-medium text-white place-items-center"
-            style={{ backgroundColor: clr }}
-          >
-            {clr}
-          </div>
-        ))}
-      </div>
+      <ColorPreview colors={colors} />
 
       <h2 className="text-xl">Loading Status</h2>
       {loading ? <div>loading</div> : null}

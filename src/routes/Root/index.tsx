@@ -7,9 +7,9 @@ import ColorContextProvider from '@/contexts/ColorContext';
 const Root = () => {
   return (
     <ColorContextProvider>
-      <div className="container">
+      <div className="container flex flex-col min-h-screen">
         <Header />
-        <main className="p-20 space-y-8">
+        <main className="flex-1 p-20 space-y-8">
           <Outlet />
         </main>
         <Footer />
