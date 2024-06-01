@@ -1,15 +1,17 @@
 import ColorPicker from './components/colorPicker';
+import { useContext } from 'react';
 import { Button } from './components/ui/button';
 import { useColorGenerator } from './hooks';
+import { ColorPreview } from '@/components';
 import {
   // createBasicColorPrompt,
   createGuidedColorPrompt,
 } from '@/helpers/generators';
 
-// const BASIC = createBasicColorPrompt({
-//   initialColor: '#579fde',
-//   usage: 'social media',
-// });
+const BASIC = createBasicColorPrompt({
+   initialColor: '#579fde',
+   usage: 'social media',
+});
 
 const GUIDED = createGuidedColorPrompt({
   initialColor: '#579fde',
@@ -20,7 +22,9 @@ const GUIDED = createGuidedColorPrompt({
 });
 
 export default function App() {
-  const { colors, loading, error, updatePrompt } = useColorGenerator();
+  const { colors, loading, error, updatePrompt } = useContext(
+    ColorContext,
+  ) as ColorContextValue;
 
   function handleClick() {
     updatePrompt(GUIDED);
@@ -35,16 +39,7 @@ export default function App() {
 
       <h2 className="text-xl">Colors</h2>
       <ColorPicker />
-      <div className="flex gap-4">
-        {colors.map((clr) => (
-          <div
-            className="grid w-20 h-20 font-medium text-white place-items-center"
-            style={{ backgroundColor: clr }}
-          >
-            {clr}
-          </div>
-        ))}
-      </div>
+      <ColorPreview colors={colors} />
 
       <h2 className="text-xl">Loading Status</h2>
       {loading ? <div>loading</div> : null}
