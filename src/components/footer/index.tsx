@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-white rounded-lg dark:bg-gray-900 relative bottom-0 left-0 w-full">
+    <footer className="bg-white rounded-lg dark:bg-background relative bottom-0 left-0 w-full">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="font-bold text-xl bg-gradient-to-r from-teal-500 via-orange-500 to-violet-700 text-transparent bg-clip-text">
