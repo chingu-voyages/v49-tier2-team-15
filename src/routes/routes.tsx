@@ -1,8 +1,9 @@
 import { RouteObject } from 'react-router-dom';
 
-import Root from './Root';
-import App from '@/App';
-import ErrorPage from '@/error-page';
+import ErrorPage from '@/routes/error-page';
+import Generator from '@/routes/generator';
+import Home from '@/routes/home';
+import Root from '@/routes/root';
 
 const routes: RouteObject[] = [
   {
@@ -12,19 +13,11 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <App />,
+        element: <Home />,
       },
       {
-        path: '/about',
-        element: <h1>About page</h1>,
-      },
-      {
-        path: '/ai-generator',
-        element: <h1>AI Generator page</h1>,
-      },
-      {
-        path: 'page-3',
-        element: <h1>Page 3</h1>,
+        path: '/generator',
+        element: <Generator />,
       },
     ],
   },

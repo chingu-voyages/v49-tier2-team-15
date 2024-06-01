@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import { Button } from './ui/button';
+import { ColorContext } from '@/context/ColorContext';
 
 export default function InfoSection() {
+  const { accentColor } = useContext(ColorContext);
+
   return (
-    <div className="text-center p-5 flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center p-5 text-center">
       <p className="my-6 max-w-7xl">
         <span>
           Let's consider the importance of colors in our lives. These bright
@@ -21,7 +27,11 @@ export default function InfoSection() {
           projects, and more.
         </span>
       </p>
-      <Button>Get me some colours</Button>
+      <Link to="generator">
+        <Button style={{ color: accentColor, borderColor: accentColor }}>
+          Get me some colours
+        </Button>
+      </Link>
     </div>
   );
 }

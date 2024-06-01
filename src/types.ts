@@ -12,17 +12,3 @@ export interface GuidedColorPrompt extends BasicColorPrompt {
   mood: string;
   keywords: Keyword[];
 }
-
-export interface ColorContextValue {
-  theme: 'light' | 'dark';
-  setTheme: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
-  colors: HEX[];
-  accentColor: HEX | null;
-  updatePrompt: (prompt: string | null) => void;
-  loading: boolean;
-  error: Error | null;
-}
-
-export interface ColorContextProviderProps {
-  children: React.ReactNode;
-}
