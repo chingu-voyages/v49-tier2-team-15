@@ -4,23 +4,26 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useColorGenerator } from '@/hooks';
-import {
-  formReducer,
-  initialFormValues,
-} from '@/utils/GuidedFormFunctions/formReducer';
+import { formReducer } from '@/utils/GuidedFormFunctions/formReducer';
 import handleChange from '@/utils/GuidedFormFunctions/handleChange';
 import {
   handleAddCustomKeyword,
   handleDeleteKeyword,
 } from '@/utils/GuidedFormFunctions/handleKeywords';
 import submitForm from '@/utils/GuidedFormFunctions/submitForm';
+import { useColorGenerator } from '@/hooks';
 
 export default function GuidedForm() {
+  const initialFormValues = {
+    usage: '',
+    audience: '',
+    mood: '',
+    keywords: '',
+    keywordsError: '',
+  }
   const [state, dispatch] = useReducer(formReducer, initialFormValues);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-
-  const { updatePrompt } = useColorGenerator();
+  const { updatePrompt } = useColorGenerator()
 
   return (
     <div className="flex justify-center items-center">
@@ -28,7 +31,7 @@ export default function GuidedForm() {
         <CardHeader className="px-0 py-3 md:py-6 text-neonGreen">
           <CardTitle>
             <span className="hidden md:block text-4xl font-normal">
-              Or get help here if you don’t know where to start...
+              Or get help here if you don&apos;t know where to start...
             </span>
             <span className="md:hidden text-xl flex justify-center">
               Guided Exprerience
@@ -38,12 +41,12 @@ export default function GuidedForm() {
         <CardContent className="p-0">
           <form
             onSubmit={(e) =>
-              submitForm(e, state, selectedKeywords, dispatch, updatePrompt)
+              submitForm(e, state, selectedKeywords, updatePrompt)
             }
           >
             <div className="grid md:grid-cols-2 gap-x-4 gap-y-2 border-4 border-neonGreen rounded-md  p-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="usage">I need my color scheme for...</Label>
+                <Label htmlFor="usage"><span className='bold'>*</span> I need my color scheme for...</Label>
                 <Input
                   id="usage"
                   name="usage"
@@ -52,14 +55,12 @@ export default function GuidedForm() {
                   value={state.usage}
                   onChange={(e) => handleChange(e, dispatch)}
                   className="bg-white"
+                  required
                 />
-                <span className="text-red-700 p-0 text-sm min-h-5">
-                  {state.usageError}
-                </span>
               </div>
 
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="audience">My audience is...</Label>
+                <Label htmlFor="audience"><span className='bold'>*</span> My audience is...</Label>
                 <Input
                   id="audience"
                   name="audience"
@@ -68,14 +69,12 @@ export default function GuidedForm() {
                   value={state.audience}
                   onChange={(e) => handleChange(e, dispatch)}
                   className="bg-white"
+                  required
                 />
-                <span className="text-red-700 p-0 text-sm min-h-5">
-                  {state.audienceError}
-                </span>
               </div>
 
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="mood">Choose a mood for colors...</Label>
+                <Label htmlFor="mood"><span className='bold'>*</span> Choose <b className=' underline underline-offset-1'>one</b> mood for colors...</Label>
                 <Input
                   id="mood"
                   name="mood"
@@ -84,10 +83,8 @@ export default function GuidedForm() {
                   value={state.mood}
                   onChange={(e) => handleChange(e, dispatch)}
                   className="bg-white"
+                  required
                 />
-                <span className="text-red-700 p-0 text-sm min-h-5">
-                  {state.moodError}
-                </span>
               </div>
 
               <div className="flex flex-col space-y-1.5">

@@ -4,6 +4,7 @@ import {
   createBasicColorPrompt,
   createGuidedColorPrompt,
 } from '@/helpers/generators';
+import GuidedForm from '@/components/GuidedForm'
 
 const BASIC = createBasicColorPrompt({
   initialColor: '#579fde',
@@ -28,6 +29,8 @@ export default function App() {
   return (
     <>
       <h1 className="text-2xl">Color App</h1>
+
+      <GuidedForm />
 
       <h2 className="text-xl">Prompt</h2>
       <p>{GUIDED}</p>

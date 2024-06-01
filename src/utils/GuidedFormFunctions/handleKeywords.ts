@@ -1,8 +1,7 @@
-import { Dispatch } from './formAction';
-import { initialFormValues } from './formReducer';
+import { Dispatch, initialFormValues } from './types';
 
 export function handleAddCustomKeyword(
-  state: typeof initialFormValues,
+  state: initialFormValues,
   selectedKeywords: string[],
   setSelectedKeywords: React.Dispatch<React.SetStateAction<string[]>>,
   dispatch: Dispatch,
