@@ -56,7 +56,7 @@ const BasicForm = () => {
         </div>
 
         <input
-          className="block w-full px-5 py-3 my-4 text-gray-900 border-0 rounded-md shadow-sm placeholder:text-gray-400 sm:text-sm"
+          className="block w-full px-5 py-3 my-4 text-gray-900 border rounded-md shadow-sm placeholder:text-gray-400 sm:text-sm"
           type="text"
           name="basic-usage"
           placeholder="I'm using these colors for..."

@@ -19,7 +19,6 @@ export function createBasicColorPrompt(input: BasicColorPrompt): string {
  * Create a guided prompt for generating color palette with OpenAI.
  *
  * @param {GuidedColorPrompt} input - The input parameters for the prompt.
- * @param {string} input.initialColor - The initial hex color to base the scheme on.
  * @param {string} input.usage - The usage context for the color scheme.
  * @param {string} input.audience - The target audience for the color scheme.
  * @param {string} input.mood - The desired mood for the color scheme.
@@ -27,7 +26,7 @@ export function createBasicColorPrompt(input: BasicColorPrompt): string {
  * @returns {string} The formatted prompt to be used by OpenAI.
  */
 export function createGuidedColorPrompt(input: GuidedColorPrompt): string {
-  return `Generate a color scheme for a design project with the base color ${input.initialColor} to be used for ${input.usage}. The target audience is ${input.audience}. The desired mood is ${input.mood}. Keywords to consider: ${input.keywords.join(', ')}. Provide only 5 hex colors.`;
+  return `Generate a color scheme for a design project to be used for ${input.usage}. The target audience is ${input.audience}. The desired mood is ${input.mood}. Keywords to consider: ${input.keywords.join(', ')}. Provide only 5 hex colors.`;
 }
 
 /**

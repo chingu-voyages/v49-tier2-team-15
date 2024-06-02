@@ -21,7 +21,6 @@ module.exports = {
         'water-brush': '"Water Brush", cursive',
       },
       colors: {
-        neonGreen: '#39ff14',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

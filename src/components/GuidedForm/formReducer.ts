@@ -1,7 +1,7 @@
-import { initialFormValues } from './types';
+import { InitialFormValues } from './types';
 
 export function formReducer(
-  state: initialFormValues,
+  state: InitialFormValues,
   action: { type: string; payload: string },
 ) {
   switch (action.type) {
