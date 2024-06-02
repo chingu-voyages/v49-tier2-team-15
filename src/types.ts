@@ -7,7 +7,8 @@ export interface BasicColorPrompt {
   usage: string;
 }
 
-export interface GuidedColorPrompt extends BasicColorPrompt {
+export interface GuidedColorPrompt {
+  usage: string;
   audience: string;
   mood: string;
   keywords: Keyword[];
