@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { Dispatch } from './types';
 
 export default function handleChange(

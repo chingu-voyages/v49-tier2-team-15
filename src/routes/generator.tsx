@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { ColorPreview } from '@/components';
-import { BasicForm } from '@/components';
+import { BasicForm, GuidedForm } from '@/components';
 import { ColorContext } from '@/context/ColorContext';
 
 export default function Generator() {
@@ -30,7 +30,7 @@ export default function Generator() {
           >
             Or get help here if you don't know where to start...
           </h2>
-          <BasicForm />
+          <GuidedForm />
         </div>
       </section>
 

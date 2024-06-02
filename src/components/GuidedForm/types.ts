@@ -13,7 +13,7 @@ export type FormAction =
 
 export type Dispatch = (action: FormAction) => void;
 
-export type initialFormValues = {
+export type InitialFormValues = {
   usage: string;
   audience: string;
   mood: string;
