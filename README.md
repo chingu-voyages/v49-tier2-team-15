@@ -11,7 +11,7 @@
 
 ## Project Description
 
-![Image Description](https://github.com/SirDominique/TER/raw/main/Screenshot%202024-06-20%20045317.png)
+![Image Description](https://github.com/chingu-voyages/v49-tier2-team-15/blob/development/img/Screenshot%202024-06-20%20045317.png)
 
 
 The Color Inspo is an app intended to serve as a personal consultant, helping users find harmonious color combinations for various purposes, including outfit coordination, interior design, website design, graphic design projects, and more.
@@ -48,13 +48,13 @@ The Color Inspo is an app intended to serve as a personal consultant, helping us
 
 
 # App Features
-![Image Description](https://github.com/SirDominique/TER/blob/main/Screenshot%202024-06-20%20084201.png)
+![Image Description](https://github.com/chingu-voyages/v49-tier2-team-15/blob/development/img/Screenshot%202024-06-20%20090256.png)
 
 
 ### Pick a Color if you have a specific idea in mind
 - Users can choose an initial color using the color picker and view its HEX code, providing a convenient starting point for their color palette.
 
-![Image Description](https://github.com/SirDominique/TER/blob/main/Screenshot%202024-06-20%20082831.png)
+![Image Description](https://github.com/chingu-voyages/v49-tier2-team-15/blob/development/img/Screenshot%202024-06-20%20082831.png)
 
 ### If you need guidance
 - Purpose: Users can specify the intended use of the colors (e.g. poster, website, interior decor...), ensuring the recommendations align with their needs.
@@ -63,7 +63,7 @@ The Color Inspo is an app intended to serve as a personal consultant, helping us
 - Keywords: Users have the option to input up to five custom keywords, influencing the output from OpenAI. This ensures that the generated suggestions remain coherent.
 
 ## Users will be able to see a preview of the color generated in a mock (e.g. website, card, component...), so that users can have a better understanding on how to use the color created by the generator
-  ![Image Description](https://github.com/SirDominique/TER/blob/main/Screenshot%202024-06-20%20083410.png)
+  ![Image Description](https://github.com/chingu-voyages/v49-tier2-team-15/blob/development/img/Screenshot%202024-06-20%20090232.png)
 
 ## Environment Variables Setup:
 
